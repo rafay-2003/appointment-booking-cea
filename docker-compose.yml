@@ -1,0 +1,46 @@
+
+services:
+
+  app:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+
+    image: cea-appointment-app:local
+
+    container_name: cea-flask-app
+
+    restart: unless-stopped
+
+    env_file:
+      - ./backend/.env.docker
+
+    expose:
+      - "5000"
+
+    networks:
+      - cea-shared
+
+  web:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+
+    image: cea-appointment-web:local
+
+    container_name: cea-nginx-web
+
+    restart: unless-stopped
+
+    depends_on:
+      - app
+
+    ports:
+      - "127.0.0.1:8080:80"
+
+    networks:
+      - cea-shared
+
+networks:
+  cea-shared:
+    external: true

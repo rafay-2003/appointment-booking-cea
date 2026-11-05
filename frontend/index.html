@@ -1,0 +1,285 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>BookEase | Appointment Booking</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+<div class="app-layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-icon">B</div>
+            <div>
+                <h2>BookEase</h2>
+                <span>Appointment Manager</span>
+            </div>
+        </div>
+
+        <nav class="navigation">
+            <a href="#dashboard" class="nav-link active">
+                <span>◫</span> Dashboard
+            </a>
+
+            <a href="#booking" class="nav-link">
+                <span>▦</span> Book Appointment
+            </a>
+
+            <a href="#appointments" class="nav-link">
+                <span>☷</span> Appointments
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="status-indicator"></div>
+            <span id="api-status">Connecting...</span>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content" id="dashboard">
+
+        <header class="topbar">
+            <div>
+                <p class="eyebrow">APPOINTMENT MANAGEMENT</p>
+                <h1>Dashboard</h1>
+                <p class="subtitle">
+                    Schedule and manage your appointments
+                    in one place.
+                </p>
+            </div>
+
+            <div class="header-badge">
+                Cloud Computing CEA
+            </div>
+        </header>
+
+        <!-- Dashboard Statistics -->
+        <section class="stats-grid">
+
+            <article class="stat-card">
+                <div class="stat-top">
+                    <span>Total Appointments</span>
+                    <div class="stat-icon blue">▦</div>
+                </div>
+                <h2 id="total-count">0</h2>
+                <p>Appointments in database</p>
+            </article>
+
+            <article class="stat-card">
+                <div class="stat-top">
+                    <span>Upcoming</span>
+                    <div class="stat-icon purple">◷</div>
+                </div>
+                <h2 id="upcoming-count">0</h2>
+                <p>Scheduled for the future</p>
+            </article>
+
+            <article class="stat-card">
+                <div class="stat-top">
+                    <span>Booked Today</span>
+                    <div class="stat-icon green">✓</div>
+                </div>
+                <h2 id="today-count">0</h2>
+                <p>Appointments scheduled today</p>
+            </article>
+
+        </section>
+
+        <!-- Booking Form -->
+        <section class="content-grid">
+
+            <div class="panel" id="booking">
+
+                <div class="panel-heading">
+                    <div>
+                        <h2>Book an Appointment</h2>
+                        <p>Choose a date and available time.</p>
+                    </div>
+                    <span class="panel-icon">+</span>
+                </div>
+
+                <form id="booking-form">
+
+                    <div class="form-group">
+                        <label for="customer-name">
+                            Full Name
+                        </label>
+                        <input
+                            type="text"
+                            id="customer-name"
+                            placeholder="Enter your full name"
+                            maxlength="100"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="customer-email">
+                            Email Address
+                        </label>
+                        <input
+                            type="email"
+                            id="customer-email"
+                            placeholder="example@email.com"
+                            maxlength="254"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="appointment-date">
+                            Appointment Date
+                        </label>
+                        <input
+                            type="date"
+                            id="appointment-date"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label>Available Time Slots</label>
+
+                        <div class="time-slots" id="time-slots">
+                            <p class="muted">
+                                Select a date to view slots.
+                            </p>
+                        </div>
+
+                        <input
+                            type="hidden"
+                            id="appointment-time"
+                            required
+                        >
+                    </div>
+
+                    <button
+                        type="submit"
+                        id="book-button"
+                        class="primary-button"
+                    >
+                        Confirm Appointment
+                    </button>
+
+                </form>
+            </div>
+
+            <!-- Booking Information -->
+            <div class="panel information-panel">
+
+                <div class="panel-heading">
+                    <div>
+                        <h2>Booking Information</h2>
+                        <p>Your appointment details.</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <span class="info-icon">◷</span>
+                    <div>
+                        <h3>Business Hours</h3>
+                        <p>Monday - Sunday</p>
+                        <p>9:00 AM - 5:00 PM</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <span class="info-icon">✓</span>
+                    <div>
+                        <h3>Instant Confirmation</h3>
+                        <p>
+                            Your booking is saved immediately
+                            in the database.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <span class="info-icon">▣</span>
+                    <div>
+                        <h3>Easy Management</h3>
+                        <p>
+                            View and cancel appointments
+                            from the dashboard.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="notice-box">
+                    <strong>Demo Application</strong>
+                    <p>
+                        Academic project for cloud computing.
+                        Use sample information only.
+                    </p>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Appointments Table -->
+        <section class="panel appointments-panel"
+                 id="appointments">
+
+            <div class="panel-heading">
+                <div>
+                    <h2>All Appointments</h2>
+                    <p>Manage your scheduled bookings.</p>
+                </div>
+
+                <button
+                    class="secondary-button"
+                    id="refresh-button"
+                    type="button"
+                >
+                    ↻ Refresh
+                </button>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Customer</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="appointments-body">
+                        <tr>
+                            <td colspan="6" class="empty-state">
+                                Loading appointments...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </section>
+
+        <footer>
+            BookEase — AWS Three-Tier Cloud Computing CEA
+        </footer>
+
+    </main>
+</div>
+
+<!-- Notification -->
+<div id="toast" class="toast" role="status"
+     aria-live="polite"></div>
+
+</body>
+</html>
