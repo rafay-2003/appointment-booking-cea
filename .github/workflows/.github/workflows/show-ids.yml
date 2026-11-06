@@ -1,0 +1,17 @@
+
+name: Show GitHub Repository IDs
+
+on:
+  workflow_dispatch:
+
+jobs:
+  show-ids:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Display IDs
+        env:
+          OWNER_ID: ${{ github.repository_owner_id }}
+          REPO_ID: ${{ github.repository_id }}
+        run: |
+          echo "Owner ID: $OWNER_ID"
+          echo "Repository ID: $REPO_ID"
